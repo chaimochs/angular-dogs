@@ -3,5 +3,22 @@
   <span class="fill-remaining-space" color="accent"></span>
 </mat-toolbar>
   <h1>
-    Welcome to {{ title }}!
+    {{ title }}
   </h1>
+
+  <img width="300" src= {{imageUrl}}>
+<hr>
+   <h3>Hi, My name is {{ownerName}}. This is my dog,  {{dogName}}. He weighs {{dogWeight}} pounds.</h3>
+
+<div>
+  <label>
+    <input type="text" class ="form-control" [(ngModel)]="ownerName" placeholder="Enter your name">
+  </label>
+  <label>
+    <input type="text" class="form-control" [(ngModel)]="dogName" placeholder="Enter name of your dog">  
+    </label>
+
+  <label>
+    <input type="text" class="form-control" [(ngModel)]="dogWeight" placeholder="How much does your dog weigh?">
+  </label>
+</div>
