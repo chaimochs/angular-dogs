@@ -1,0 +1,23 @@
+<div class="container">
+<mat-card class="example-card" *ngFor="let dog of dogs; index as i" >
+  
+    <mat-card-header>
+      <p class = "dogName">{{dog.name}}</p>
+    </mat-card-header>
+    <mat-card-subtitle>
+        <p>Owned by: {{dog.owner}}</p>
+      </mat-card-subtitle>
+    <mat-card-subtitle>
+      <p>Weight: {{dog.weight}} lbs</p>
+    </mat-card-subtitle>
+    <mat-card-content>
+    <p>Birthday: {{dog.birthDate | date:format}}</p>
+    </mat-card-content>
+    <button mat-raised-button color="primary"(click)="removeDog(dog[i])">Remove Dog</button>
+    <button class="btn" [ngClass]="{'btn-remove': !clicked, 'btn-remove': clicked}" (click)="clicked = !clicked; toggleFormat()">
+        {{clicked ? '-' : '+'}}
+    </button>
+</mat-card>
+</div>
+<br>
+<br>

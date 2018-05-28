@@ -19,7 +19,7 @@ export class AddDogComponent implements OnInit {
       this.imageUrl = 'https://besthqwallpapers.com/Uploads/22-1-2018/37943/thumb2-4k-moon-dog-night-digital-art.jpg';
     }
     else {
-      this.imageUrl = 'http://imgsrv.wkdzradio.com/image/wkdz4/UserFiles/Image/Dog%20Day1.jpg';
+      this.imageUrl = 'https://i.ytimg.com/vi/oH_GHvcF9VM/hqdefault.jpg';
     }
   }
 
