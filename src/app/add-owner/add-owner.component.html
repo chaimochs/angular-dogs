@@ -1,0 +1,19 @@
+<hr>
+<br>
+<form class="owner-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Dog owner's name" [(ngModel)]="ownerName" name="name">
+      </mat-form-field>
+    
+      <mat-form-field class="example-full-width">
+            <input matInput placeholder="Dog owner's age" [(ngModel)]="ownerAge" name="age">
+          </mat-form-field>
+         
+            <mat-checkbox [(ngModel)]="ownerLicense" name="box">Has "Dangerous Dog" license</mat-checkbox>
+
+      </form>
+
+      <h3>Current Dog Owner: {{ ownerName }}</h3>
+      <h3>Owner Age: {{ ownerAge }}</h3>
+      <h3>Has "Dangerous Dog" license {{ownerLicense}}</h3>
+  
