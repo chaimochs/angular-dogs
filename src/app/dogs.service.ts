@@ -14,12 +14,19 @@ export class DogsService {
 
   constructor() { }
 
-  getDogs() : Dog[] {
+  getDog(dogId) {
+  return DOGS[dogId];
+  }
+
+  getDogs(): Dog[] {
     return DOGS;
   }
 
-  addDog(dog : Dog) {
+  addDog(dog: Dog) {
     DOGS.push(dog);
   }
 
+showDogs(){
+  console.log(DOGS)
+}
 }

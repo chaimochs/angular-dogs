@@ -13,9 +13,9 @@ import { Dog } from '../dog';
 export class DogsComponent implements OnInit {
 
   dogs = new Array<Dog>();
-  dateFormat = 'fullDate'
+  dateFormat = 'fullDate';
 
-  constructor(private dogsService : DogsService) {
+  constructor(private dogsService: DogsService) {
     this.dogs = dogsService.getDogs();
    }
 
@@ -27,7 +27,7 @@ export class DogsComponent implements OnInit {
   }
 
   toggleDate() {
-    this.dateFormat == 'fullDate' ? this.dateFormat = 'shortDate' : this.dateFormat = 'fullDate';
+    this.dateFormat === 'fullDate' ? this.dateFormat = 'shortDate' : this.dateFormat = 'fullDate';
   }
 
 }
