@@ -3,6 +3,7 @@ import { Dog } from './dog';
 import Walk from './walk';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 
 const DOGS =  [
   {id: 0, name: 'Rex', weight: 20, birthDate: new Date(2006, 2, 21), owner: 'Jack Daniels', walks: []},
@@ -22,34 +23,35 @@ export class DogsService {
   private scoreSubject : Subject<number>;
   
 
-  constructor() {
+  constructor(private http : HttpClient) {
       this.scoreSubject = new Subject<number>();
       this.dogCountSubject = new Subject<number>();
       this.scoreUpdated = this.scoreSubject.asObservable();
       this.dogCountUpdated = this.dogCountSubject.asObservable();
    }
 
-  getDogs() : Dog[] {
-    return DOGS;
-  }
+     getDogs() : Observable<Dog[]> {
+      return this.http.get<Dog[]>('/api/dogs');
+    }
 
   getDog(id : number) {
-    return this.getDogs().find((dog) => dog.id == id);
+    return this.http.get<Dog>('/api/dogs/' + id);
   }
 
-  addDog(dog : Dog) {
-    dog.id = this.getDogs().length + 1;
-    DOGS.push(dog);
+  addDog(newDog: Dog) : Observable<Dog>{
+    return this.http.post<Dog>('/api/dogs', { dog: newDog });
   }
 
   updateDog(id: number, dog: Dog) {
-    var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
-    DOGS[existingDogIndex] = dog;
+    // var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
+    // DOGS[existingDogIndex] = dog;
+    return this.http.put<Dog>('/api/dogs/' + id, dog);
   }
 
   removeDog(id) {
-    var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
-    DOGS.splice(existingDogIndex, 1);
+    // var existingDogIndex = this.getDogs().findIndex((dog) => dog.id == id);
+     // return this.http.delete<Dog>('/api/dogs/existingDogIndex');
+     return this.http.delete<Dog>('/api/dogs/' + id);
   }
 
   addWalk(dog : Dog, walk : Walk) {

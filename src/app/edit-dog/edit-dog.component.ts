@@ -10,18 +10,24 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EditDogComponent implements OnInit {
 
-  dog : Dog;
+  dog : Dog = new Dog();
 
   constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.dog = this.dogsService.getDog(params.id);
+    this.dogsService.getDog(params.id).subscribe( (response) => {
+    this.dog = response;
+    console.log(this.dog)
     });
-  }
+  });
+  }  
 
   updateDog() {
-    this.dogsService.updateDog(this.dog.id, this.dog);
+    this.dogsService.updateDog(this.dog.id, this.dog).subscribe( (res) => {
+    return res;  
+    });
+
     this.router.navigate(['/']);
   }
 

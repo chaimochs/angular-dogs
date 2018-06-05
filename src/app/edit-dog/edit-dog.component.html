@@ -12,4 +12,4 @@
   
   <div *ngIf="dogWeight < 10" class="validation-error">{{dogName}} is underweight</div>  
   
-  <button mat-button (click)="updateDog()" color="primary">Update</button>
+  <button mat-button (click)="updateDog(this.dog)" color="primary">Update</button>

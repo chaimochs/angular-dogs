@@ -14,6 +14,17 @@ router.get('/dogs', (req, res) => {
   res.send(JSON.stringify(DOGS));
 });
 
+router.get('/dogs/:id' , (req, res) => {
+        let fetchDog;
+        for(var i=0; i < DOGS.length; i++){
+            if(req.params.id == DOGS[i].id){
+            fetchDog = DOGS[i];
+            }
+        }
+    res.send(JSON.stringify(fetchDog));
+  });
+
+
 router.post('/dogs', (req, res) => {
     var dog = req.body.dog;
     dog.id = generateId();
@@ -23,8 +34,8 @@ router.post('/dogs', (req, res) => {
 
 router.put('/dogs/:id', (req, res) => {
     var dogIndex = DOGS.findIndex((dog) => dog.id.toString() == req.params.id.toString());
-    dogId = DOGS[dogIndex].id;
-    DOGS[dogIndex] = req.body.dog;
+    var dogId = DOGS[dogIndex].id;
+    DOGS[dogIndex] = req.body;
     DOGS[dogIndex].id = dogId;
     res.send(JSON.stringify(DOGS[dogIndex]));
 });

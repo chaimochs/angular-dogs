@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DogsService } from '../dogs.service';
 import { Dog } from '../dog';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-dog',
@@ -13,7 +14,7 @@ export class AddDogComponent implements OnInit {
   dog: Dog = new Dog();
   imageUrl: string;
 
-  constructor(private dogsService : DogsService) {
+  constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {
     var currentDate = new Date();
     if (currentDate.getHours() > 21 && currentDate.getHours() <= 6) {
       this.imageUrl = 'https://besthqwallpapers.com/Uploads/22-1-2018/37943/thumb2-4k-moon-dog-night-digital-art.jpg';
@@ -28,8 +29,10 @@ export class AddDogComponent implements OnInit {
   }
 
   submitDog() {
-    this.dogsService.addDog(this.dog);
-    this.dogsService.dogCountSubject.next();
+    this.dogsService.addDog(this.dog).subscribe( () => {
+     // this.dogsService.dogCountSubject.next();
+    });
+    this.router.navigate(['/']);
   }
 
 }

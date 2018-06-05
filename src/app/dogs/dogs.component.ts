@@ -18,22 +18,31 @@ export class DogsComponent implements OnInit {
   
 
   constructor(private dogsService : DogsService, private route : ActivatedRoute, private router : Router) {
-    this.dogs = dogsService.getDogs();
+ 
    }
 
   ngOnInit() {
     this.route.queryParams.subscribe(queryParams => {
       this.filterTerm = queryParams.name;
     });
+
+       this.setDogs();
     }
 
+    setDogs() {
+      this.dogsService.getDogs().subscribe((dogs) => { 
+        this.dogs = dogs;
+      });
+    }
 
   onFilterChanged(filterString) {
     this.router.navigate(['.'], { queryParams: { name: filterString }});
   }
 
   removeDog(id) {
-    this.dogsService.removeDog(id);
+   this.dogsService.removeDog(id).subscribe(() => {
+    this.setDogs();
+    });
     this.dogsService.dogCountSubject.next();
   }
 
